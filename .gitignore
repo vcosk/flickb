@@ -1,5 +1,10 @@
 *.class
-
+*.jpg
+*.jpeg
+*.gif
+*.png
+*.bmp
+*.tif
 # Package Files #
 #*.jar
 #*.war
