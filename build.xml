@@ -1,0 +1,52 @@
+<project default="zip">
+	
+	<path id="cp">
+		<pathelement path="${lib}"/>
+		<fileset dir="lib">
+			<include name="**/*.jar"/>
+		</fileset>
+	</path>
+	<target name="clean">
+		<delete includeemptydirs="true" dir="bin/*"></delete>
+		<delete includeemptydirs="true" dir="build"></delete>
+	</target>
+	<target name="compile" depends="clean">
+			<javac srcdir="${src}" destdir="${classes}" target="1.5">
+				<classpath refid="cp"></classpath>
+			</javac>
+	</target>
+	<target name="jar" depends="compile">
+		<jar basedir="${classes}" destfile="${build}/flickb.jar" includes="**/*.class">
+			<manifest>
+				<attribute name="Main-Class" value="in.goahead.tools.flickr.FlickrDownloader"/>
+				<attribute name="Class-Path" value="${lib.file.1}"/>
+			</manifest>
+		</jar>
+	</target>
+	<target name="copy" depends="jar">
+		<copy file="app.properties" overwrite="true" todir="${build}" />
+		<copy file="run.bat" overwrite="true" todir="${build}" />
+		<copy file="Read Me.txt" overwrite="true" todir="${build}" />
+		<copy file="Read Me.doc" overwrite="true" todir="${build}" />
+		<copy  overwrite="true" todir="${build.lib}">
+			<fileset dir="${lib}">
+			</fileset>
+		</copy>
+		<mkdir dir="flickb/flickb"/>
+		<copy todir="flickb/flickb" includeemptydirs="false">
+			<fileset dir="${build}">
+			</fileset>
+		</copy>
+		<deltree dir="${build}" />
+	</target>
+	<target name="zip" depends="copy">
+		<zip destfile="flickb_bin.zip" basedir="flickb"></zip>
+		<deltree dir="flickb" />
+	</target>
+	<property name="src" value="src" />
+	<property name="classes" value="bin" />
+	<property name="lib" value="lib" />
+	<property name="build" value="build" />
+	<property name="build.lib" value="build/lib" />
+	<property name="lib.file.1" value="lib/flickrapi-1.2.jar" />
+</project>

@@ -1,0 +1,6 @@
+1. Application downloads only the photos assigned to a set.
+2. provide public permission to all the photos and the sets.
+3. Execute run.bat
+4. Open the URL prompted on the console and authorize the application to access your profile.
+5. After authorization, press enter on the application console.
+6. The highest resolution available for the user for each photo will be downloaded to the output directory grouped based on sets defined in Flickr.
