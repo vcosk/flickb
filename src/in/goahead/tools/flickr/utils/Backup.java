@@ -76,7 +76,7 @@ public class Backup {
 		}
 		
 		logger.info("Reading available sets");
-		
+		logger.info("Is user a pro user? "+user.isPro());
 		for(String setTitle : allPhotos.keySet()) {
 			String setDirectoryName = makeSafeFilename(setTitle);
 			File setDirectory = new File(directory, setDirectoryName);
@@ -90,7 +90,7 @@ public class Backup {
 				String filename = u.getFile();
 				filename = filename.substring(filename.lastIndexOf("/") + 1 , filename.length());				
 				System.out.println("Now writing " + filename + " to " + setDirectory.getCanonicalPath());
-				BufferedInputStream inStream = new BufferedInputStream(photoInt.getImageAsStream(photo, user.isPro()?Size.ORIGINAL:Size.LARGE));
+				BufferedInputStream inStream = new BufferedInputStream(photoInt.getImageAsStream(photo, Size.ORIGINAL));
 				File newFile = new File(setDirectory.getCanonicalPath()+"/"+filename);
 				
 				FileOutputStream fos = new FileOutputStream(newFile);
